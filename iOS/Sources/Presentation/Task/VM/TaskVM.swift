@@ -16,6 +16,8 @@ final class TaskVM: ObservableObject {
     ]
     @Published var currentWeek: [Date] = []
     
+    @Published var currentDate = Date()
+    
     // MARK: - Init
     init() {
         fetchCurrentWeek()
@@ -40,4 +42,5 @@ final class TaskVM: ObservableObject {
         }
         
     }
+    
 }
