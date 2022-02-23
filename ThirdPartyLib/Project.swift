@@ -6,7 +6,7 @@ let project = Project.dynamicFramework(
     packages: [
         .Swinject
     ],
-    deploymentTarget: .iOS(targetVersion: "13.0", devices: [.iphone, .ipad]),
+    deploymentTarget: .iOS(targetVersion: "14.0", devices: [.iphone, .ipad]),
     dependencies: [
         .SPM.Swinject
     ]
