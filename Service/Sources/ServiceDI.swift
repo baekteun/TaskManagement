@@ -7,7 +7,6 @@ public extension Container {
     }
 
     private func registerRepositories() {
-        
     }
 
     private func registerUseCases() {
