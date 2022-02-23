@@ -6,6 +6,8 @@ extension Container {
     }
     
     private func registerVM() {
-        
+        self.register(TaskVM.self) { r in
+            return TaskVM()
+        }
     }
 }
