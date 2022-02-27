@@ -10,6 +10,8 @@ import SwiftUI
 
 struct HomeView: View {
     @StateObject var viewModel: TaskVM = AppDelegate.container.resolve(TaskVM.self)!
+    @Namespace var animation
+    
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
             LazyVStack(spacing: 15, pinnedViews: [.sectionHeaders]) {
@@ -25,21 +27,28 @@ struct HomeView: View {
                                     Text(day.extractDate(format: "EEE"))
                                         .font(.system(size: 14))
                                     
-                                    if day.isToday() {
-                                        Circle()
-                                            .fill(.white)
-                                            .frame(width: 8, height: 8)
-                                    }
+                                    Circle()
+                                        .fill(.white)
+                                        .frame(width: 8, height: 8)
+                                        .opacity(viewModel.isCurrentDate(day) ? 1 : 0)
                                 }
-                                .foregroundColor(.white)
+                                .foregroundColor(viewModel.isCurrentDate(day) ? .white : .black)
                                 .frame(width: 45, height: 90)
                                 .background(
                                     ZStack {
-                                        Capsule()
-                                            .fill(.black)
-                                        
+                                        if viewModel.isCurrentDate(day) {
+                                            Capsule()
+                                                .fill(.black)
+                                                .matchedGeometryEffect(id: "CURRENTDATE", in: animation)
+                                        }
                                     }
                                 )
+                                .contentShape(Capsule())
+                                .onTapGesture {
+                                    withAnimation {
+                                        viewModel.currentDate = day
+                                    }
+                                }
                             }
                         }
                         .padding(.horizontal)
