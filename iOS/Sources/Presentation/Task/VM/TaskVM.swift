@@ -38,9 +38,13 @@ final class TaskVM: ObservableObject {
             if let weekDay = calendar.date(byAdding: .day, value: day, to: firstWeek) {
                 currentWeek.append(weekDay)
             }
-            
         }
-        
+    }
+    
+    func isCurrentDate(_ date: Date) -> Bool {
+        var calendar = Calendar.current
+        calendar.timeZone = TimeZone(identifier: "UTC")!
+        return calendar.isDate(date, inSameDayAs: currentDate)
     }
     
 }
